@@ -47,15 +47,15 @@ We welcome contributions of any kind! You can participate in the project by subm
    
 1. Fork this repository.  
 2. Create your feature branch:  
-    ```bash  
+    ```bash 
     git checkout -b feature/YourFeature  
     ```  
 3. Commit your changes:  
-    ```bash  
+    ```bash
     git commit -m 'Add some feature'  
     ```  
 4. Push to the branch:  
-    ```bash  
+    ```bash 
     git push origin feature/YourFeature  
     ```  
 5. Open a pull request.  
