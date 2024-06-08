@@ -18,6 +18,8 @@
 		34BF336A27B7321A00350785 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34BF336927B7321A00350785 /* HealthKit.framework */; };
 		34C77FAC27D817F200454BB6 /* DemographicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C77FAB27D817F200454BB6 /* DemographicView.swift */; };
 		34C77FAF27D8191400454BB6 /* country_codes.json in Resources */ = {isa = PBXBuildFile; fileRef = 34C77FAE27D8191400454BB6 /* country_codes.json */; };
+		83F288BE2C14C85F002F51C8 /* QRCodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F288BD2C14C85F002F51C8 /* QRCodeScannerView.swift */; };
+		83F288C02C14CA25002F51C8 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F288BF2C14CA25002F51C8 /* Config.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		34BF336927B7321A00350785 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		34C77FAB27D817F200454BB6 /* DemographicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemographicView.swift; sourceTree = "<group>"; };
 		34C77FAE27D8191400454BB6 /* country_codes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = country_codes.json; sourceTree = "<group>"; };
+		83F288BD2C14C85F002F51C8 /* QRCodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerView.swift; sourceTree = "<group>"; };
+		83F288BF2C14CA25002F51C8 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +98,9 @@
 				343BE21927D042460064C9F2 /* Views */,
 				34BF336827B7321900350785 /* cyclingai.entitlements */,
 				34BF335627B6159500350785 /* cyclingaiApp.swift */,
+				83F288BD2C14C85F002F51C8 /* QRCodeScannerView.swift */,
 				34BF335827B6159500350785 /* ContentView.swift */,
+				83F288BF2C14CA25002F51C8 /* Config.swift */,
 				34BF335A27B6159900350785 /* Assets.xcassets */,
 				34BF335C27B6159900350785 /* Preview Content */,
 				343BE21C27D076760064C9F2 /* Extensions.swift */,
@@ -158,7 +164,7 @@
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1320;
-				ORGANIZATIONNAME = Sahha;
+				ORGANIZATIONNAME = cyclingai;
 				TargetAttributes = {
 					34BF335227B6159500350785 = {
 						CreatedOnToolsVersion = 13.2;
@@ -204,10 +210,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83F288BE2C14C85F002F51C8 /* QRCodeScannerView.swift in Sources */,
 				34C77FAC27D817F200454BB6 /* DemographicView.swift in Sources */,
 				34BF335927B6159500350785 /* ContentView.swift in Sources */,
 				34BF335727B6159500350785 /* cyclingaiApp.swift in Sources */,
 				343BE21B27D042690064C9F2 /* AuthenticationView.swift in Sources */,
+				83F288C02C14CA25002F51C8 /* Config.swift in Sources */,
 				3491B8A227D2FD3D00EA1130 /* AnalyzationView.swift in Sources */,
 				343BE21D27D076760064C9F2 /* Extensions.swift in Sources */,
 			);
@@ -341,10 +349,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"cyclingai/Preview Content\"";
-				DEVELOPMENT_TEAM = DFT926V374;
+				DEVELOPMENT_TEAM = N5MYGB677W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = cyclingai/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "cycling.ai would like access to your health activity for analysis.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -374,10 +383,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"cyclingai/Preview Content\"";
-				DEVELOPMENT_TEAM = DFT926V374;
+				DEVELOPMENT_TEAM = N5MYGB677W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = cyclingai/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "cycling.ai would like access to your health activity for analysis.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
