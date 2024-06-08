@@ -4,7 +4,7 @@ import SwiftUI
 import Sahha
 
 @main
-struct SahhaDemoApp: App {
+struct cyclingaiApp: App {
     
     init() {
         let settings = SahhaSettings(environment: .sandbox)

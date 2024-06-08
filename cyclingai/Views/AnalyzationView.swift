@@ -8,6 +8,30 @@ struct AnalysisView: View {
     @State var analysisString: String = ""
     @State var isAnalyzeButtonEnabled: Bool = true
     
+    func storeHealthData(_ healthData: String) {
+            guard let userId = Sahha.profileToken else { return }
+            
+            // Store the health data in Supabase
+            let url = URL(string: "\(Config.supabaseProjectURL)/rest/v1/user_health_data")!
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue(Config.supabaseAPIKey, forHTTPHeaderField: "apikey")
+            let body: [String: Any] = [
+                "user_id": userId,
+                "health_data": healthData
+            ]
+            request.httpBody = try? JSONSerialization.data(withJSONObject: body)
+            
+            URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if let error = error {
+                    print("Error storing health data: \(error.localizedDescription)")
+                } else {
+                    print("Health data stored successfully")
+                }
+            }.resume()
+        }
+
     func getAnalysisForToday() {
         analysisString = "Waiting..."
         isAnalyzeButtonEnabled = false
@@ -19,6 +43,7 @@ struct AnalysisView: View {
             else if let json = json {
                 print(json)
                 analysisString = json
+                storeHealthData(json)
             }
         }
     }
@@ -35,6 +60,7 @@ struct AnalysisView: View {
             else if let json = json {
                 print(json)
                 analysisString = json
+                storeHealthData(json)
             }
         }
     }

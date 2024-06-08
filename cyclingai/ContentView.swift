@@ -6,6 +6,33 @@ import Sahha
 struct ContentView: View {
     
     @State var sensorStatus: SahhaSensorStatus = .pending
+        @State var showQRScanner = false
+        @State var userId: String?
+    @State var iPhoneUUID: String = UIDevice.current.identifierForVendor?.uuidString ?? ""
+        
+    func linkIPhoneToUser() {
+            guard let userId = userId else { return }
+            
+            // Store the iPhone UUID and user ID in Supabase
+            let url = URL(string: "\(Config.supabaseProjectURL)/rest/v1/user_devices")!
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue(Config.supabaseAPIKey, forHTTPHeaderField: "apikey")
+            let body: [String: Any] = [
+                "user_id": userId,
+                "device_id": iPhoneUUID
+            ]
+            request.httpBody = try? JSONSerialization.data(withJSONObject: body)
+            
+            URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if let error = error {
+                    print("Error linking iPhone to user: \(error.localizedDescription)")
+                } else {
+                    print("iPhone linked to user successfully")
+                }
+            }.resume()
+        }
     
     var body: some View {
         NavigationView {
@@ -33,6 +60,26 @@ struct ContentView: View {
                         }
                     }
                 }
+                Section(header: Text("LINKING")) {
+                                    Button {
+                                        showQRScanner = true
+                                    } label: {
+                                        HStack {
+                                            Image(systemName: "qrcode.viewfinder")
+                                            Text("Link to User ID")
+                                        }
+                                    }
+                                    .sheet(isPresented: $showQRScanner) {
+                                        QRCodeScannerView(userId: $userId)
+                                    }
+                                    
+                    if let userId = userId {
+                                    Text("Linked User ID: \(userId)")
+                                    Button("Link iPhone to User") {
+                                        linkIPhoneToUser()
+                                    }
+                                }
+                                }
                 Section(header: Text("SENSORS")) {
                     Picker("Sensor Status", selection: .constant(sensorStatus.rawValue)) {
                         Text("Pending").tag(0)
@@ -88,7 +135,7 @@ struct ContentView: View {
                         }
                     }
                     NavigationLink {
-                        WebView(url: URL(string: "https://webview.sahha.ai/app")!, profileToken: Sahha.profileToken)
+                        WebView(url: URL(string: "https://webview.sahha.ai/app")!, profileToken: Sahha.profileToken, userId: userId)
                             .ignoresSafeArea()
                             .navigationTitle("Insights")
                             .navigationBarTitleDisplayMode(.inline)
@@ -136,22 +183,21 @@ struct ContentView_Previews: PreviewProvider {
 import WebKit
 
 struct WebView: UIViewRepresentable {
-    // 1
     let url: URL
     var profileToken: String?
+    var userId: String?
     
-    // 2
     func makeUIView(context: Context) -> WKWebView {
-        
         return WKWebView()
     }
     
-    // 3
     func updateUIView(_ webView: WKWebView, context: Context) {
-        
         var request = URLRequest(url: url)
         if let token = profileToken {
             request.setValue(token, forHTTPHeaderField: "AUTH")
+        }
+        if let userId = userId {
+            request.setValue(userId, forHTTPHeaderField: "USER_ID")
         }
         webView.load(request)
     }
